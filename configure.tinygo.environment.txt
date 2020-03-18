@@ -1,0 +1,98 @@
+#########################################################
+# the short version
+#########################################################
+
+export GOROOT=/c/Users/devchu/sdk/go1.13.8
+
+# probably only need this(below) once.
+#$ mkdir $HOME/projects/tinygo/src
+#$ mv $HOME/projects/tinygo/blinky1/ $HOME/projects/tinygo/src/
+
+export GOPATH=/c/Users/devchu/projects/tinygo
+
+export PATH=${PATH}:/c/Program\ Files\ \(x86\)/Arduino/hardware/tools/avr/bin
+
+export PATH=$PATH:/c/Program\ Files\ \(x86\)/Arduino/hardware/tools/avr/etc/
+
+
+
+
+
+#########################################################
+# the long version (trial and error)
+#########################################################
+
+#$ tinygo flash -target arduino -port COM5 blinky1
+#error: requires go version 1.11, 1.12, or 1.13, got go1.14
+
+#$ tinygo env
+#GOOS="windows"
+#GOARCH="amd64"
+#GOROOT="C:\\Go\\1.14"
+#GOPATH="C:\\Users\\devchu\\go"
+#GOCACHE="C:\\Users\\devchu\\AppData\\Local\\tinygo"
+#CGO_ENABLED="1"
+#TINYGOROOT="C:\\tinygo"
+
+export GOROOT=/c/Users/devchu/sdk/go1.13.8
+
+#$ tinygo flash -target arduino -port COM5 blinky1
+#build command-line-arguments: cannot find package "blinky1" in any of:
+#        C:\Users\devchu\sdk\go1.13.8\src\blinky1 (from $GOROOT)
+#        C:\Users\devchu\go\src\blinky1 (from $GOPATH)
+
+
+#devchu@DESKTOP-HNCF7A5 MINGW64 ~/projects/tinygo
+#$ mkdir ./src
+
+
+#devchu@DESKTOP-HNCF7A5 MINGW64 ~/projects/tinygo
+#$ mv blinky1/ src/
+
+#devchu@DESKTOP-HNCF7A5 MINGW64 ~/projects/tinygo
+#$ tinygo flash -target arduino -port COM5 blinky1
+#build command-line-arguments: cannot find package "blinky1" in any of:
+#        C:\Users\devchu\sdk\go1.13.8\src\blinky1 (from $GOROOT)
+#        C:\Users\devchu\go\src\blinky1 (from $GOPATH)
+
+
+#devchu@DESKTOP-HNCF7A5 MINGW64 ~/projects/tinygo
+#$ tinygo env
+#GOOS="windows"
+#GOARCH="amd64"
+#GOROOT="C:/Users/devchu/sdk/go1.13.8"
+#GOPATH="C:\\Users\\devchu\\go"
+#GOCACHE="C:\\Users\\devchu\\AppData\\Local\\tinygo"
+#CGO_ENABLED="1"
+#TINYGOROOT="C:\\tinygo"
+
+export GOPATH=/c/Users/devchu/projects/tinygo
+
+#$ tinygo flash -target arduino -port COM5 blinky1
+#error: failed to build targets/avr.S: exec: "avr-gcc": executable file not found in %PATH%
+
+#devchu@DESKTOP-HNCF7A5 MINGW64 ~/projects/tinygo
+#$ find /c/Program\ Files\ \(x86\)/Arduino/ -name "*avr-gcc*"
+#/c/Program Files (x86)/Arduino/hardware/tools/avr/bin/avr-gcc-7.3.0.exe
+#/c/Program Files (x86)/Arduino/hardware/tools/avr/bin/avr-gcc-ar.exe
+#/c/Program Files (x86)/Arduino/hardware/tools/avr/bin/avr-gcc-nm.exe
+#/c/Program Files (x86)/Arduino/hardware/tools/avr/bin/avr-gcc-ranlib.exe
+#/c/Program Files (x86)/Arduino/hardware/tools/avr/bin/avr-gcc.exe
+
+export PATH=${PATH}:/c/Program\ Files\ \(x86\)/Arduino/hardware/tools/avr/bin
+
+#$ tinygo flash -target arduino -port COM5 blinky1
+#avrdude: can't open config file "": Invalid argument
+#avrdude: error reading system wide configuration file ""
+#error: failed to flash C:\Users\devchu\AppData\Local\Temp\tinygo895174167\main.hex: exit status 1
+
+export PATH=$PATH:/c/Program\ Files\ \(x86\)/Arduino/hardware/tools/avr/etc/avrdude.conf
+
+#$ tinygo flash -target arduino -port COM5 blinky1
+
+#avrdude: AVR device initialized and ready to accept instructions
+
+#Reading | ################################################## | 100% 0.00s
+
+# blah blah - it works after this
+
